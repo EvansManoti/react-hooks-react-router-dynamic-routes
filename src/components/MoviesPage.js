@@ -1,12 +1,21 @@
 import React from "react";
-import { Route } from "react-router-dom";
-import MoviesList from "./MoviesList";
+import { Route, Switch } from "react-router-dom";
+import Movies from "./Movies";
+import MovieInfo from "./MovieInfo";
 
-function MoviesPage({ movies }) {
+function MoviesPage({ movies, match }) {
   return (
     <div>
-      <MoviesList movies={movies} />
+      <h1>Movies Page</h1>
+      <Movies movies={movies} />
+      <Switch>
+        <Route
+          path={`${match.url}/:movieId`}
+          render={(props) => <MovieInfo {...props} movies={movies} />}
+        />
+      </Switch>
     </div>
   );
 }
+
 export default MoviesPage;
